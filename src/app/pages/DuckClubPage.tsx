@@ -87,28 +87,24 @@ const LOGOS = [
     name: "WAVY WORDMARK",
     src: wavyLogo,
     alt: "Duck Club wavy wordmark logo",
-    aspect: "3/2",
   },
   {
     id: "dck",
     name: "DCK MARK",
     src: dckLogo,
     alt: "DCK abbreviated logo mark",
-    aspect: "1/1",
   },
   {
     id: "oval",
     name: "OVAL BADGE",
     src: ovalLogo,
     alt: "Duck with oval badge logo",
-    aspect: "1/1",
   },
   {
     id: "duck",
     name: "DUCK / CLUB",
     src: duckIllustration,
     alt: "Duck Club stacked logo",
-    aspect: "3/2",
   },
 ];
 
@@ -165,14 +161,13 @@ function LogoCard({ logo, index }: { logo: (typeof LOGOS)[0]; index: number }) {
         delay: index * 0.1,
         ease: [0.16, 1, 0.3, 1],
       }}
-      className="flex flex-col"
+      className="flex flex-col h-full bg-card border border-border"
     >
       {/* Logo display */}
       <div
-        className="relative w-full overflow-hidden transition-colors duration-500"
+        className="relative w-full aspect-square overflow-hidden transition-colors duration-500"
         style={{
           backgroundColor: bgColor,
-          aspectRatio: logo.aspect,
         }}
       >
         <AnimatePresence mode="wait">
@@ -209,7 +204,7 @@ function LogoCard({ logo, index }: { logo: (typeof LOGOS)[0]; index: number }) {
       </div>
 
       {/* Info row + swatches */}
-      <div className="flex items-center justify-between pt-4 pb-6 border-b border-border">
+      <div className="flex items-center justify-between px-4 py-4 border-t border-border mt-auto">
         <span
           className="text-muted-foreground"
           style={{
@@ -400,7 +395,7 @@ export function DuckClubPage() {
           01 — LOGO SYSTEM
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-2 gap-px bg-border">
           {LOGOS.map((logo, i) => (
             <LogoCard key={logo.id} logo={logo} index={i} />
           ))}
