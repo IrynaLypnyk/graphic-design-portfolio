@@ -6,14 +6,12 @@ import poster from "@/images/other/poster.png";
 
 const WORKS = [
   {
-    src: cover,
-    alt: "Undercover in Miami — DVD cover wrap",
-    aspectRatio: "16/10",
-  },
-  {
     src: poster,
     alt: "Undercover in Miami — movie poster",
-    aspectRatio: "1/1.4",
+  },
+  {
+    src: cover,
+    alt: "Undercover in Miami — DVD cover wrap",
   },
 ] as const;
 
@@ -85,17 +83,16 @@ export function OtherWorksPage() {
         >
           <div className="w-full h-px bg-border mb-12" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {WORKS.map((work) => (
               <div
                 key={work.alt}
-                className="relative overflow-hidden bg-card"
-                style={{ aspectRatio: work.aspectRatio }}
+                className="relative overflow-hidden bg-card flex items-center justify-center"
               >
                 <ImageWithFallback
                   src={work.src}
                   alt={work.alt}
-                  className="block w-full h-full object-cover"
+                  className="block w-full max-h-[90vh] object-contain"
                   loading="lazy"
                 />
               </div>
