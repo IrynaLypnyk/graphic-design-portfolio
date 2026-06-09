@@ -3,45 +3,41 @@ import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
-import wavyLogo from "@/imports/DuckClub-DuckClub-Wavy-White__2_.png";
-import wavyBlack from "@/imports/DuckClub-DuckClub-Wavy-Black__2_.png";
-import dckLogo from "@/imports/DuckClub-DCK-White__2_.png";
-import dckRed from "@/imports/DuckClub-DCK-Red__1_.png";
-import dckBrown from "@/imports/DuckClub-DCK-Brown__1_.png";
-import dckPink from "@/imports/DuckClub-DCK-Pink-shirts__1_.png";
-import dckBlack from "@/imports/DuckClub-DCK-Black__1_.png";
-import dckGray from "@/imports/DuckClub-DCK-Gray-Shirt__1_.png";
-import ovalLogo from "@/imports/DuckClub-Duck-WithOval-White.png";
-import ovalPink from "@/imports/DuckClub-Duck-WithOval-Pink.png";
-import ovalYellow from "@/imports/DuckClub-Duck-WithOval-Yellow.png";
-import ovalBlack from "@/imports/DuckClub-Duck-WithOval-Black.png";
-import ovalGreen from "@/imports/DuckClub-Duck-WithOval-Green.png";
-import ovalCoffee from "@/imports/DuckClub-Duck-WithOval-Coffee.png";
-import duckIllustration from "@/imports/ducks__-_2026-03-01T171955.380.png";
-import duckV2 from "@/imports/ducks___33_.png";
-import duckV3 from "@/imports/ducks___44_.png";
-import duckV4 from "@/imports/ducks__-_2026-01-23T202357.790.png";
-import duckV5 from "@/imports/ducks__-_2026-01-25T142106.737.png";
-import duckV6 from "@/imports/ducks___43_.png";
-import banner1 from "@/imports/photo_5280802594588662421_y.jpg";
-import banner2 from "@/imports/photo_5280802594588662426_y.jpg";
-import banner3 from "@/imports/photo_5280802594588662420_w.jpg";
-import banner4 from "@/imports/photo_5341597757879294256_y.jpg";
-import banner5 from "@/imports/photo_5280802594588662424_y.jpg";
-import banner6 from "@/imports/photo_5240067664464516904_w.jpg";
-import banner7 from "@/imports/photo_5213104555564932790_w.jpg";
-import banner8 from "@/imports/photo_5280802594588662423_w.jpg";
-import banner9 from "@/imports/photo_5445406687926882672_w.jpg";
-import bannerStory0 from "@/imports/____________2026-06-09_215114294.png";
-import bannerStory1 from "@/imports/Stories-1.png";
-import bannerStory2 from "@/imports/Stories-4-1.png";
-import bannerStory3 from "@/imports/Stproies-2-1.png";
-import bannerStory4 from "@/imports/Stories-6-1.png";
-import bannerStory5 from "@/imports/Stories-3-1.png";
-import process1 from "@/imports/image-1.png";
-import process2 from "@/imports/image-2.png";
-import process3 from "@/imports/image-3.png";
-import process4 from "@/imports/image-4.png";
+import wavyLogo from "@/imports/duck-club/logo-wavy-white.png";
+import wavyBlack from "@/imports/duck-club/logo-wavy-black.png";
+import dckLogo from "@/imports/duck-club/logo-dck-white.png";
+import dckRed from "@/imports/duck-club/logo-dck-red.png";
+import dckBrown from "@/imports/duck-club/logo-dck-brown.png";
+import dckPink from "@/imports/duck-club/logo-dck-pink.png";
+import dckBlack from "@/imports/duck-club/logo-dck-black.png";
+import dckGray from "@/imports/duck-club/logo-dck-gray.png";
+import ovalLogo from "@/imports/duck-club/logo-oval-white.png";
+import ovalPink from "@/imports/duck-club/logo-oval-pink.png";
+import ovalYellow from "@/imports/duck-club/logo-oval-yellow.png";
+import ovalBlack from "@/imports/duck-club/logo-oval-black.png";
+import ovalGreen from "@/imports/duck-club/logo-oval-green.png";
+import ovalCoffee from "@/imports/duck-club/logo-oval-coffee.png";
+import duckIllustration from "@/imports/duck-club/logo-duck-cw01.png";
+import duckV2 from "@/imports/duck-club/logo-duck-cw02.png";
+import duckV3 from "@/imports/duck-club/logo-duck-cw03.png";
+import duckV4 from "@/imports/duck-club/logo-duck-cw04.png";
+import duckV5 from "@/imports/duck-club/logo-duck-cw05.png";
+import duckV6 from "@/imports/duck-club/logo-duck-cw06.png";
+import process1 from "@/imports/duck-club/process-01.jpg";
+import process2 from "@/imports/duck-club/process-02.jpg";
+import process3 from "@/imports/duck-club/process-03.jpg";
+import process4 from "@/imports/duck-club/process-04.jpg";
+import process5 from "@/imports/duck-club/process-05.jpg";
+import process6 from "@/imports/duck-club/process-06.jpg";
+import process7 from "@/imports/duck-club/process-07.jpg";
+import process8 from "@/imports/duck-club/process-08.jpg";
+import process9 from "@/imports/duck-club/process-09.jpg";
+import bannerStory0 from "@/imports/duck-club/banner-story-00.png";
+import bannerStory1 from "@/imports/duck-club/banner-story-01.png";
+import bannerStory2 from "@/imports/duck-club/banner-story-02.png";
+import bannerStory3 from "@/imports/duck-club/banner-story-03.png";
+import bannerStory4 from "@/imports/duck-club/banner-story-04.png";
+import bannerStory5 from "@/imports/duck-club/banner-story-05.png";
 
 const COLORWAYS = [
   { name: "BLACK", hex: "#0C0C0C", light: false },
@@ -117,10 +113,6 @@ const LOGOS = [
 ];
 
 const BANNER_IMAGES = [
-  // { src: process1, alt: "Duck Club work in progress 1" },
-  // { src: process2, alt: "Duck Club work in progress 2" },
-  // { src: process3, alt: "Duck Club work in progress 3" },
-  // { src: process4, alt: "Duck Club work in progress 4" },
   { src: bannerStory0, alt: "Duck Club banner story 0" },
   { src: bannerStory1, alt: "Duck Club banner story 1" },
   { src: bannerStory2, alt: "Duck Club banner story 2" },
@@ -130,15 +122,15 @@ const BANNER_IMAGES = [
 ];
 
 const PROCESS_IMAGES = [
-  { src: banner1, alt: "Duck Club banner 1" },
-  { src: banner2, alt: "Duck Club banner 2" },
-  { src: banner3, alt: "Duck Club banner 3" },
-  { src: banner4, alt: "Duck Club banner 4" },
-  { src: banner5, alt: "Duck Club banner 5" },
-  { src: banner6, alt: "Duck Club banner 6" },
-  { src: banner7, alt: "Duck Club banner 7" },
-  { src: banner8, alt: "Duck Club banner 8" },
-  { src: banner9, alt: "Duck Club banner 9" },
+  { src: process1, alt: "Duck Club process photo 1" },
+  { src: process2, alt: "Duck Club process photo 2" },
+  { src: process3, alt: "Duck Club process photo 3" },
+  { src: process4, alt: "Duck Club process photo 4" },
+  { src: process5, alt: "Duck Club process photo 5" },
+  { src: process6, alt: "Duck Club process photo 6" },
+  { src: process7, alt: "Duck Club process photo 7" },
+  { src: process8, alt: "Duck Club process photo 8" },
+  { src: process9, alt: "Duck Club process photo 9" },
 ];
 
 function LogoCard({ logo, index }: { logo: (typeof LOGOS)[0]; index: number }) {
