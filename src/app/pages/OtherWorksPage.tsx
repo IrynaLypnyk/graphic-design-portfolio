@@ -1,5 +1,13 @@
 import { useNavigate } from "react-router";
 import { motion } from "motion/react";
+import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
+import cover from "@/imports/other/cover.png";
+import poster from "@/imports/other/poster.png";
+
+const WORKS = [
+  { src: poster, alt: "Undercover in Miami — movie poster", aspectRatio: "1/1.4" },
+  { src: cover, alt: "Undercover in Miami — DVD cover wrap", aspectRatio: "16/10" },
+] as const;
 
 export function OtherWorksPage() {
   const navigate = useNavigate();
@@ -54,7 +62,7 @@ export function OtherWorksPage() {
           </div>
         </motion.div>
 
-        {/* Works placeholder */}
+        {/* Works grid */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -63,52 +71,22 @@ export function OtherWorksPage() {
         >
           <div className="w-full h-px bg-border mb-12" />
 
-          {/* Placeholder masonry-style grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border">
-            {Array.from({ length: 8 }).map((_, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
+            {WORKS.map((work) => (
               <div
-                key={i}
-                className="flex flex-col items-center justify-center"
-                style={{
-                  background: "#0f0f0f",
-                  aspectRatio: i % 3 === 0 ? "1/1.4" : "1/1",
-                }}
+                key={work.alt}
+                className="relative overflow-hidden bg-card"
+                style={{ aspectRatio: work.aspectRatio }}
               >
-                <span
-                  className="text-muted-foreground"
-                  style={{
-                    fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: "0.6rem",
-                    letterSpacing: "0.3em",
-                  }}
-                >
-                  WORK {String(i + 1).padStart(2, "0")}
-                </span>
-                <span
-                  className="text-muted-foreground mt-2 opacity-30"
-                  style={{
-                    fontFamily: "'Barlow', sans-serif",
-                    fontWeight: 300,
-                    fontSize: "0.7rem",
-                  }}
-                >
-                  COMING SOON
-                </span>
+                <ImageWithFallback
+                  src={work.src}
+                  alt={work.alt}
+                  className="block w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
             ))}
           </div>
-
-          <p
-            className="mt-8 text-muted-foreground"
-            style={{
-              fontFamily: "'Barlow', sans-serif",
-              fontWeight: 300,
-              fontSize: "0.8rem",
-              letterSpacing: "0.1em",
-            }}
-          >
-            WORKS LOADING — SEND YOUR IMAGES TO POPULATE THIS SECTION.
-          </p>
         </motion.div>
       </main>
     </div>
