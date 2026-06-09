@@ -287,11 +287,11 @@ function LogoCard({ logo, index }: { logo: (typeof LOGOS)[0]; index: number }) {
 
 function MediaSlot({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="relative aspect-square bg-card border border-border overflow-hidden">
+    <div className="relative aspect-square bg-card border border-border overflow-hidden flex items-center justify-center">
       <ImageWithFallback
         src={src}
         alt={alt}
-        className="block w-full h-full object-cover"
+        className="block max-w-full max-h-full w-auto h-auto object-contain"
         loading="lazy"
       />
     </div>
@@ -440,7 +440,7 @@ export function DuckClubPage() {
         >
           WORK IN PROGRESS
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-border mb-16">
           {PROCESS_IMAGES.map((image) => (
             <MediaSlot key={image.alt} src={image.src} alt={image.alt} />
           ))}
