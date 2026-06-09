@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router";
 import { motion } from "motion/react";
-import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import cover from "@/images/other/cover.png";
 import poster from "@/images/other/poster.png";
 
@@ -89,11 +88,12 @@ export function OtherWorksPage() {
                 key={work.alt}
                 className="relative overflow-hidden bg-card flex items-center justify-center"
               >
-                <ImageWithFallback
+                <img
                   src={work.src}
                   alt={work.alt}
                   className="block w-full max-h-[90vh] object-contain"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
             ))}

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
-import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 import wavyLogo from "@/images/duck-club/logo-wavy-white.png";
 import wavyBlack from "@/images/duck-club/logo-wavy-black.png";
@@ -179,13 +178,14 @@ function LogoCard({ logo, index }: { logo: (typeof LOGOS)[0]; index: number }) {
             transition={{ duration: 0.25 }}
             className="absolute inset-0 flex items-center justify-center p-8 md:p-10"
           >
-            <ImageWithFallback
+            <img
               src={displaySrc}
               alt={logo.alt}
               className="block max-h-[70%] max-w-[90%] w-auto h-auto object-contain"
               style={{
                 filter: isLight ? "invert(1)" : "none",
               }}
+              decoding="async"
             />
           </motion.div>
         </AnimatePresence>
@@ -283,11 +283,12 @@ function LogoCard({ logo, index }: { logo: (typeof LOGOS)[0]; index: number }) {
 function MediaSlot({ src, alt }: { src: string; alt: string }) {
   return (
     <div className="relative aspect-square bg-card border border-border overflow-hidden flex items-center justify-center">
-      <ImageWithFallback
+      <img
         src={src}
         alt={alt}
         className="block max-w-full max-h-full w-auto h-auto object-contain"
         loading="lazy"
+        decoding="async"
       />
     </div>
   );
