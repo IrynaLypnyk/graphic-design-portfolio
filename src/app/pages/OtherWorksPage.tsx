@@ -1,12 +1,20 @@
 import { useNavigate } from "react-router";
 import { motion } from "motion/react";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
-import cover from "@/imports/other/cover.png";
-import poster from "@/imports/other/poster.png";
+import cover from "@/images/other/cover.png";
+import poster from "@/images/other/poster.png";
 
 const WORKS = [
-  { src: poster, alt: "Undercover in Miami — movie poster", aspectRatio: "1/1.4" },
-  { src: cover, alt: "Undercover in Miami — DVD cover wrap", aspectRatio: "16/10" },
+  {
+    src: cover,
+    alt: "Undercover in Miami — DVD cover wrap",
+    aspectRatio: "16/10",
+  },
+  {
+    src: poster,
+    alt: "Undercover in Miami — movie poster",
+    aspectRatio: "1/1.4",
+  },
 ] as const;
 
 export function OtherWorksPage() {
@@ -27,14 +35,20 @@ export function OtherWorksPage() {
           <span style={{ fontSize: "1.1rem" }}>←</span>
           <span
             className="tracking-[0.25em]"
-            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem" }}
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: "0.65rem",
+            }}
           >
             PORTFOLIO
           </span>
         </button>
         <span
           className="text-muted-foreground tracking-[0.3em]"
-          style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem" }}
+          style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: "0.65rem",
+          }}
         >
           OTHER WORKS
         </span>
