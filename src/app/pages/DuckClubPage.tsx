@@ -239,7 +239,7 @@ function LogoCard({ logo, index }: { logo: Logo; index: number }) {
 
 function MediaSlot({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="relative aspect-square bg-card border border-border overflow-hidden flex items-center justify-center">
+    <div className="relative bg-card border border-border overflow-hidden flex items-center justify-center">
       <img
         src={src}
         alt={alt}
