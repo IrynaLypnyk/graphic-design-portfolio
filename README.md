@@ -4,6 +4,8 @@ This website showcases graphic design and illustration work by **Tykhon Lypnyk**
 
 All portfolio images, artwork, and creative direction are **Tykhon's original work**.
 
+**Live site:** [https://lypnyk-tykhon.vercel.app/](https://lypnyk-tykhon.vercel.app/)
+
 ## Featured work
 
 - **Duck Club** — Brand identity, logo system, social applications, and process documentation
