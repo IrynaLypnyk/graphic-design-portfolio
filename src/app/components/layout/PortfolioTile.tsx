@@ -39,7 +39,7 @@ export function PortfolioTile({
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay }}
       onClick={() => runAction(onClick)}
       {...pressProps}
-      className={`group relative flex flex-col items-start justify-end p-8 md:p-12 transition-colors duration-200 min-h-[45vh] md:min-h-0 ${hoverClass} ${pressed ? pressedBgClass : ""} ${className}`.trim()}
+      className={`group relative flex flex-col items-start justify-end p-8 md:p-12 transition-colors duration-200 min-h-[45dvh] md:min-h-0 ${hoverClass} ${pressed ? pressedBgClass : ""} ${className}`.trim()}
       style={{ cursor: "pointer", touchAction: "manipulation" }}
     >
       <div className="flex flex-col gap-3">
