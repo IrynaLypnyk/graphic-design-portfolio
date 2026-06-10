@@ -345,7 +345,7 @@ export function DuckClubPage() {
 
         <SectionLabel variant="mono">01 — LOGO SYSTEM</SectionLabel>
 
-        <div className="grid grid-cols-2 gap-px bg-border">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-border">
           {LOGOS.map((logo, i) => (
             <LogoCard key={logo.id} logo={logo} index={i} />
           ))}
