@@ -8,7 +8,7 @@ type PageShellProps = {
 export function PageShell({ children, className = "" }: PageShellProps) {
   return (
     <div
-      className={`min-h-screen flex flex-col bg-background text-foreground ${className}`.trim()}
+      className={`min-h-dvh flex flex-col bg-background text-foreground ${className}`.trim()}
       style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
     >
       {children}
