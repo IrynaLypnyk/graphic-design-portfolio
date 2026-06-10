@@ -22,9 +22,11 @@ export function PortfolioPage() {
             </>
           }
           onClick={() => navigate("/portfolio/duck-club")}
-          hoverClass="border-b md:border-b-0 md:border-r border-border hover:bg-primary active:bg-primary data-[pressed]:bg-primary"
-          textHoverClass="group-hover:text-primary-foreground group-active:text-primary-foreground group-data-[pressed]:text-primary-foreground"
-          arrowHoverClass="group-hover:text-primary-foreground group-active:text-primary-foreground group-data-[pressed]:text-primary-foreground"
+          hoverClass="border-b md:border-b-0 md:border-r border-border hover:bg-primary"
+          textHoverClass="group-hover:text-primary-foreground"
+          arrowHoverClass="group-hover:text-primary-foreground"
+          pressedBgClass="bg-primary"
+          pressedTextClass="text-primary-foreground"
           animationX={-30}
         />
 
@@ -33,9 +35,11 @@ export function PortfolioPage() {
           category="OTHER WORKS"
           title="OTHER"
           onClick={() => navigate("/portfolio/other")}
-          hoverClass="hover:bg-foreground active:bg-foreground data-[pressed]:bg-foreground"
-          textHoverClass="group-hover:text-background group-active:text-background group-data-[pressed]:text-background"
-          arrowHoverClass="group-hover:text-background group-active:text-background group-data-[pressed]:text-background"
+          hoverClass="hover:bg-foreground"
+          textHoverClass="group-hover:text-background"
+          arrowHoverClass="group-hover:text-background"
+          pressedBgClass="bg-foreground"
+          pressedTextClass="text-background"
           animationX={30}
           delay={0.1}
         />

@@ -20,7 +20,7 @@ export function PageHeader({
   sticky = false,
 }: PageHeaderProps) {
   const navigate = useNavigate();
-  const { pressed, pressProps } = usePressFeedback();
+  const { pressed, runAction, pressProps } = usePressFeedback();
 
   return (
     <header
@@ -29,10 +29,9 @@ export function PageHeader({
       }`.trim()}
     >
       <button
-        onClick={() => navigate(backTo)}
-        data-pressed={pressed ? "" : undefined}
+        onClick={() => runAction(() => navigate(backTo))}
         {...pressProps}
-        className="flex items-center gap-3 text-muted-foreground hover:text-foreground active:text-foreground data-[pressed]:text-foreground transition-colors duration-200"
+        className={`flex items-center gap-3 transition-colors duration-200 hover:text-foreground ${pressed ? "text-foreground" : "text-muted-foreground"}`}
         style={{ cursor: "pointer", touchAction: "manipulation" }}
       >
         <span style={{ fontSize: "1.1rem" }}>←</span>

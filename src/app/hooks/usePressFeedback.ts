@@ -1,36 +1,41 @@
-import { useRef, useState, type PointerEventHandler } from "react";
+import { useRef, useState } from "react";
 
-const RELEASE_DELAY_MS = 280;
+const TOUCH_FEEDBACK_MS = 180;
+
+function isCoarsePointer() {
+  return window.matchMedia("(pointer: coarse)").matches;
+}
 
 export function usePressFeedback() {
   const [pressed, setPressed] = useState(false);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const timerRef = useRef<ReturnType<typeof setTimeout>>();
 
-  const clearReleaseTimer = () => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = undefined;
+  const clearTimer = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = undefined;
     }
   };
 
-  const scheduleRelease = () => {
-    clearReleaseTimer();
-    timeoutRef.current = setTimeout(() => setPressed(false), RELEASE_DELAY_MS);
+  const runAction = (action: () => void) => {
+    clearTimer();
+    setPressed(true);
+
+    const delay = isCoarsePointer() ? TOUCH_FEEDBACK_MS : 0;
+
+    timerRef.current = setTimeout(() => {
+      action();
+      timerRef.current = setTimeout(() => setPressed(false), 80);
+    }, delay);
   };
 
   const pressProps = {
-    onPointerDown: ((event) => {
-      if (event.button !== 0) return;
-      clearReleaseTimer();
-      setPressed(true);
-    }) satisfies PointerEventHandler<HTMLElement>,
-    onPointerUp: scheduleRelease,
-    onPointerLeave: scheduleRelease,
+    onPointerDown: () => setPressed(true),
     onPointerCancel: () => {
-      clearReleaseTimer();
+      clearTimer();
       setPressed(false);
     },
   };
 
-  return { pressed, pressProps };
+  return { pressed, runAction, pressProps };
 }

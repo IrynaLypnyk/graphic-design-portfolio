@@ -16,16 +16,19 @@ function ContactLink({
   link: (typeof LINKS)[number];
   index: number;
 }) {
-  const { pressed, pressProps } = usePressFeedback();
+  const { pressed, runAction, pressProps } = usePressFeedback();
 
   return (
     <a
       href={link.href}
       target="_blank"
       rel="noopener noreferrer"
-      data-pressed={pressed ? "" : undefined}
+      onClick={(event) => {
+        event.preventDefault();
+        runAction(() => window.open(link.href, "_blank", "noopener,noreferrer"));
+      }}
       {...pressProps}
-      className="group flex items-center justify-between py-6 border-b border-border hover:pl-4 active:pl-4 data-[pressed]:pl-4 transition-all duration-300"
+      className={`group flex items-center justify-between py-6 border-b border-border transition-all duration-200 hover:pl-4 ${pressed ? "pl-4" : ""}`}
       style={{ touchAction: "manipulation" }}
     >
       <div className="flex items-center gap-6">
@@ -53,7 +56,7 @@ function ContactLink({
       </div>
       <div className="flex items-center gap-4">
         <span
-          className="text-muted-foreground group-hover:text-foreground group-active:text-foreground group-data-[pressed]:text-foreground transition-colors duration-200"
+          className={`transition-colors duration-200 group-hover:text-foreground ${pressed ? "text-foreground" : "text-muted-foreground"}`}
           style={{
             fontFamily: "'Barlow', sans-serif",
             fontWeight: 300,
@@ -63,7 +66,7 @@ function ContactLink({
           {link.handle}
         </span>
         <span
-          className="text-muted-foreground group-hover:text-primary group-active:text-primary group-data-[pressed]:text-primary transition-colors duration-200"
+          className={`transition-colors duration-200 group-hover:text-primary ${pressed ? "text-primary" : "text-muted-foreground"}`}
           style={{ fontSize: "1rem" }}
         >
           →
