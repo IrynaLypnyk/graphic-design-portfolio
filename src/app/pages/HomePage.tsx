@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import { motion } from "motion/react";
 import { PageShell } from "@/app/components/layout/PageShell";
+import { usePressFeedback } from "@/app/hooks/usePressFeedback";
 
 const FACTS = [
   { label: "AGE", value: "17" },
@@ -13,6 +14,8 @@ const FACTS = [
 
 export function HomePage() {
   const navigate = useNavigate();
+  const contactPress = usePressFeedback();
+  const portfolioPress = usePressFeedback();
 
   return (
     <PageShell className="overflow-hidden">
@@ -116,11 +119,13 @@ export function HomePage() {
       >
         <button
           onClick={() => navigate("/contact")}
-          className="group relative flex items-center justify-center py-8 md:py-10 border-r border-border transition-colors duration-300 hover:bg-foreground active:bg-foreground"
-          style={{ cursor: "pointer" }}
+          data-pressed={contactPress.pressed ? "" : undefined}
+          {...contactPress.pressProps}
+          className="group relative flex items-center justify-center py-8 md:py-10 border-r border-border transition-colors duration-300 hover:bg-foreground active:bg-foreground data-[pressed]:bg-foreground"
+          style={{ cursor: "pointer", touchAction: "manipulation" }}
         >
           <span
-            className="tracking-[0.25em] text-foreground group-hover:text-background group-active:text-background transition-colors duration-300"
+            className="tracking-[0.25em] text-foreground group-hover:text-background group-active:text-background group-data-[pressed]:text-background transition-colors duration-300"
             style={{
               fontFamily: "'Barlow Condensed', sans-serif",
               fontWeight: 600,
@@ -134,11 +139,13 @@ export function HomePage() {
 
         <button
           onClick={() => navigate("/portfolio")}
-          className="group relative flex items-center justify-center gap-3 py-8 md:py-10 transition-colors duration-300 hover:bg-primary active:bg-primary"
-          style={{ cursor: "pointer" }}
+          data-pressed={portfolioPress.pressed ? "" : undefined}
+          {...portfolioPress.pressProps}
+          className="group relative flex items-center justify-center gap-3 py-8 md:py-10 transition-colors duration-300 hover:bg-primary active:bg-primary data-[pressed]:bg-primary"
+          style={{ cursor: "pointer", touchAction: "manipulation" }}
         >
           <span
-            className="tracking-[0.25em] text-foreground group-hover:text-primary-foreground group-active:text-primary-foreground transition-colors duration-300"
+            className="tracking-[0.25em] text-foreground group-hover:text-primary-foreground group-active:text-primary-foreground group-data-[pressed]:text-primary-foreground transition-colors duration-300"
             style={{
               fontFamily: "'Barlow Condensed', sans-serif",
               fontWeight: 600,
@@ -149,7 +156,7 @@ export function HomePage() {
             PORTFOLIO
           </span>
           <span
-            className="text-muted-foreground group-hover:text-primary-foreground group-active:text-primary-foreground transition-colors duration-300"
+            className="text-muted-foreground group-hover:text-primary-foreground group-active:text-primary-foreground group-data-[pressed]:text-primary-foreground transition-colors duration-300"
             style={{ fontSize: "1.2rem" }}
           >
             →

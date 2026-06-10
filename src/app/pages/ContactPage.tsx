@@ -1,12 +1,77 @@
 import { motion } from "motion/react";
 import { PageShell } from "@/app/components/layout/PageShell";
 import { PageHeader } from "@/app/components/layout/PageHeader";
+import { usePressFeedback } from "@/app/hooks/usePressFeedback";
 
 const LINKS = [
   { label: "TELEGRAM", handle: "@yourhandle", href: "https://t.me/yourhandle" },
   { label: "INSTAGRAM", handle: "@yourhandle", href: "https://instagram.com/yourhandle" },
   { label: "BEHANCE", handle: "yourhandle", href: "https://behance.net/yourhandle" },
 ];
+
+function ContactLink({
+  link,
+  index,
+}: {
+  link: (typeof LINKS)[number];
+  index: number;
+}) {
+  const { pressed, pressProps } = usePressFeedback();
+
+  return (
+    <a
+      href={link.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-pressed={pressed ? "" : undefined}
+      {...pressProps}
+      className="group flex items-center justify-between py-6 border-b border-border hover:pl-4 active:pl-4 data-[pressed]:pl-4 transition-all duration-300"
+      style={{ touchAction: "manipulation" }}
+    >
+      <div className="flex items-center gap-6">
+        <span
+          className="text-muted-foreground"
+          style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: "0.6rem",
+            letterSpacing: "0.2em",
+          }}
+        >
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <span
+          className="text-foreground tracking-widest"
+          style={{
+            fontFamily: "'Barlow Condensed', sans-serif",
+            fontWeight: 600,
+            fontSize: "clamp(1rem, 3vw, 1.5rem)",
+            letterSpacing: "0.2em",
+          }}
+        >
+          {link.label}
+        </span>
+      </div>
+      <div className="flex items-center gap-4">
+        <span
+          className="text-muted-foreground group-hover:text-foreground group-active:text-foreground group-data-[pressed]:text-foreground transition-colors duration-200"
+          style={{
+            fontFamily: "'Barlow', sans-serif",
+            fontWeight: 300,
+            fontSize: "0.85rem",
+          }}
+        >
+          {link.handle}
+        </span>
+        <span
+          className="text-muted-foreground group-hover:text-primary group-active:text-primary group-data-[pressed]:text-primary transition-colors duration-200"
+          style={{ fontSize: "1rem" }}
+        >
+          →
+        </span>
+      </div>
+    </a>
+  );
+}
 
 export function ContactPage() {
   return (
@@ -55,55 +120,7 @@ export function ContactPage() {
         >
           <div className="w-full h-px bg-border mb-0" />
           {LINKS.map((link, i) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center justify-between py-6 border-b border-border hover:pl-4 active:pl-4 transition-all duration-300"
-            >
-              <div className="flex items-center gap-6">
-                <span
-                  className="text-muted-foreground"
-                  style={{
-                    fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: "0.6rem",
-                    letterSpacing: "0.2em",
-                  }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span
-                  className="text-foreground tracking-widest"
-                  style={{
-                    fontFamily: "'Barlow Condensed', sans-serif",
-                    fontWeight: 600,
-                    fontSize: "clamp(1rem, 3vw, 1.5rem)",
-                    letterSpacing: "0.2em",
-                  }}
-                >
-                  {link.label}
-                </span>
-              </div>
-              <div className="flex items-center gap-4">
-                <span
-                  className="text-muted-foreground group-hover:text-foreground group-active:text-foreground transition-colors duration-200"
-                  style={{
-                    fontFamily: "'Barlow', sans-serif",
-                    fontWeight: 300,
-                    fontSize: "0.85rem",
-                  }}
-                >
-                  {link.handle}
-                </span>
-                <span
-                  className="text-muted-foreground group-hover:text-primary group-active:text-primary transition-colors duration-200"
-                  style={{ fontSize: "1rem" }}
-                >
-                  →
-                </span>
-              </div>
-            </a>
+            <ContactLink key={link.label} link={link} index={i} />
           ))}
         </motion.div>
       </main>

@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { usePressFeedback } from "@/app/hooks/usePressFeedback";
 
 type PortfolioTileProps = {
   index: string;
@@ -25,14 +26,18 @@ export function PortfolioTile({
   delay = 0,
   className = "",
 }: PortfolioTileProps) {
+  const { pressed, pressProps } = usePressFeedback();
+
   return (
     <motion.button
       initial={{ opacity: 0, x: animationX }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay }}
       onClick={onClick}
+      data-pressed={pressed ? "" : undefined}
+      {...pressProps}
       className={`group relative flex flex-col items-start justify-end p-8 md:p-12 transition-colors duration-400 min-h-[45vh] md:min-h-0 ${hoverClass} ${className}`.trim()}
-      style={{ cursor: "pointer" }}
+      style={{ cursor: "pointer", touchAction: "manipulation" }}
     >
       <div className="flex flex-col gap-3">
         <span

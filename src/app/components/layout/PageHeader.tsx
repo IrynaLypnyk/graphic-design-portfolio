@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import { usePressFeedback } from "@/app/hooks/usePressFeedback";
 
 const monoLabelStyle = {
   fontFamily: "'JetBrains Mono', monospace",
@@ -19,6 +20,7 @@ export function PageHeader({
   sticky = false,
 }: PageHeaderProps) {
   const navigate = useNavigate();
+  const { pressed, pressProps } = usePressFeedback();
 
   return (
     <header
@@ -28,8 +30,10 @@ export function PageHeader({
     >
       <button
         onClick={() => navigate(backTo)}
-        className="flex items-center gap-3 text-muted-foreground hover:text-foreground active:text-foreground transition-colors duration-200"
-        style={{ cursor: "pointer" }}
+        data-pressed={pressed ? "" : undefined}
+        {...pressProps}
+        className="flex items-center gap-3 text-muted-foreground hover:text-foreground active:text-foreground data-[pressed]:text-foreground transition-colors duration-200"
+        style={{ cursor: "pointer", touchAction: "manipulation" }}
       >
         <span style={{ fontSize: "1.1rem" }}>←</span>
         <span className="tracking-[0.25em]" style={monoLabelStyle}>
