@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 
 import wavyLogo from "@/images/duck-club/logo-wavy-white.png";
@@ -37,17 +36,37 @@ import bannerStory2 from "@/images/duck-club/banner-story-02.png";
 import bannerStory3 from "@/images/duck-club/banner-story-03.png";
 import bannerStory4 from "@/images/duck-club/banner-story-04.png";
 import bannerStory5 from "@/images/duck-club/banner-story-05.png";
+import { PageShell } from "@/app/components/layout/PageShell";
+import { PageHeader } from "@/app/components/layout/PageHeader";
 
-const COLORWAYS = [
-  { name: "BLACK", hex: "#0C0C0C", light: false },
-  { name: "BURGUNDY", hex: "#7A1E2E", light: false },
-  { name: "CHARCOAL", hex: "#2A2A2A", light: false },
-  { name: "STONE", hex: "#4A4A4A", light: false },
-  { name: "CREAM", hex: "#F0EDE8", light: true },
-  { name: "SLATE", hex: "#1C2630", light: false },
+type Colorway = {
+  name: string;
+  src: string;
+  swatch: string;
+};
+
+type Logo = {
+  id: string;
+  name: string;
+  alt: string;
+  colorways: Colorway[];
+};
+
+const WAVY_COLORWAYS: Colorway[] = [
+  { name: "WHITE", src: wavyLogo, swatch: "#F0EDE8" },
+  { name: "BLACK", src: wavyBlack, swatch: "#0C0C0C" },
 ];
 
-const OVAL_COLORWAYS = [
+const DCK_COLORWAYS: Colorway[] = [
+  { name: "WHITE", src: dckLogo, swatch: "#F0EDE8" },
+  { name: "RED", src: dckRed, swatch: "#8B2020" },
+  { name: "BROWN", src: dckBrown, swatch: "#7A5030" },
+  { name: "PINK", src: dckPink, swatch: "#D48090" },
+  { name: "BLACK", src: dckBlack, swatch: "#0C0C0C" },
+  { name: "GRAY", src: dckGray, swatch: "#888888" },
+];
+
+const OVAL_COLORWAYS: Colorway[] = [
   { name: "WHITE", src: ovalLogo, swatch: "#F0EDE8" },
   { name: "BLACK", src: ovalBlack, swatch: "#0C0C0C" },
   { name: "BURGUNDY", src: ovalLogo, swatch: "#7A1E2E" },
@@ -57,21 +76,7 @@ const OVAL_COLORWAYS = [
   { name: "COFFEE", src: ovalCoffee, swatch: "#7A5A40" },
 ];
 
-const WAVY_COLORWAYS = [
-  { name: "WHITE", src: wavyLogo, swatch: "#F0EDE8" },
-  { name: "BLACK", src: wavyBlack, swatch: "#0C0C0C" },
-];
-
-const DCK_COLORWAYS = [
-  { name: "WHITE", src: dckLogo, swatch: "#F0EDE8" },
-  { name: "RED", src: dckRed, swatch: "#8B2020" },
-  { name: "BROWN", src: dckBrown, swatch: "#7A5030" },
-  { name: "PINK", src: dckPink, swatch: "#D48090" },
-  { name: "BLACK", src: dckBlack, swatch: "#0C0C0C" },
-  { name: "GRAY", src: dckGray, swatch: "#888888" },
-];
-
-const DUCK_COLORWAYS = [
+const DUCK_COLORWAYS: Colorway[] = [
   { name: "CW 01", src: duckIllustration, swatch: "#F0EDE8" },
   { name: "CW 02", src: duckV2, swatch: "#C8A060" },
   { name: "CW 03", src: duckV3, swatch: "#7A5A40" },
@@ -80,30 +85,30 @@ const DUCK_COLORWAYS = [
   { name: "CW 06", src: duckV6, swatch: "#3A5A7A" },
 ];
 
-const LOGOS = [
+const LOGOS: Logo[] = [
   {
     id: "wavy",
     name: "WAVY WORDMARK",
-    src: wavyLogo,
     alt: "Duck Club wavy wordmark logo",
+    colorways: WAVY_COLORWAYS,
   },
   {
     id: "dck",
     name: "DCK MARK",
-    src: dckLogo,
     alt: "DCK abbreviated logo mark",
+    colorways: DCK_COLORWAYS,
   },
   {
     id: "oval",
     name: "OVAL BADGE",
-    src: ovalLogo,
     alt: "Duck with oval badge logo",
+    colorways: OVAL_COLORWAYS,
   },
   {
     id: "duck",
     name: "DUCK / CLUB",
-    src: duckIllustration,
     alt: "Duck Club stacked logo",
+    colorways: DUCK_COLORWAYS,
   },
 ];
 
@@ -128,28 +133,39 @@ const PROCESS_IMAGES = [
   { src: process9, alt: "Duck Club process photo 9" },
 ];
 
-function LogoCard({ logo, index }: { logo: (typeof LOGOS)[0]; index: number }) {
-  const [activeColor, setActiveColor] = useState(0);
-  const [activeOval, setActiveOval] = useState(0);
+function SwatchButton({
+  color,
+  active,
+  title,
+  onClick,
+}: {
+  color: string;
+  active: boolean;
+  title: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      title={title}
+      className="transition-transform duration-200 hover:scale-110"
+      style={{
+        width: "14px",
+        height: "14px",
+        borderRadius: "50%",
+        backgroundColor: color,
+        border: active ? "2px solid #F0EDE8" : "2px solid transparent",
+        outline: active ? "1px solid #555555" : "none",
+        outlineOffset: "1px",
+        cursor: "pointer",
+      }}
+    />
+  );
+}
 
-  const isWavy = logo.id === "wavy";
-  const isDck = logo.id === "dck";
-  const isOval = logo.id === "oval";
-  const isDuck = logo.id === "duck";
-
-  const wavyCw = WAVY_COLORWAYS[activeOval];
-  const dckCw = DCK_COLORWAYS[activeOval];
-  const ovalCw = OVAL_COLORWAYS[activeOval];
-  const duckCw = DUCK_COLORWAYS[activeOval];
-  const bgCw = COLORWAYS[activeColor];
-
-  const swapMode = isWavy || isDck || isOval || isDuck;
-  const activeCw = isWavy ? wavyCw : isDck ? dckCw : isOval ? ovalCw : duckCw;
-
-  const displaySrc = swapMode ? activeCw.src : logo.src;
-  const bgColor = swapMode ? "#0C0C0C" : bgCw.hex;
-  const isLight = swapMode ? false : bgCw.light;
-  const colorLabel = swapMode ? activeCw.name : bgCw.name;
+function LogoCard({ logo, index }: { logo: Logo; index: number }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeColorway = logo.colorways[activeIndex];
 
   return (
     <motion.div
@@ -162,16 +178,10 @@ function LogoCard({ logo, index }: { logo: (typeof LOGOS)[0]; index: number }) {
       }}
       className="flex flex-col h-full bg-card border border-border"
     >
-      {/* Logo display */}
-      <div
-        className="relative w-full aspect-square overflow-hidden transition-colors duration-500"
-        style={{
-          backgroundColor: bgColor,
-        }}
-      >
+      <div className="relative w-full aspect-square overflow-hidden transition-colors duration-500 bg-[#0C0C0C]">
         <AnimatePresence mode="wait">
           <motion.div
-            key={swapMode ? activeCw.name : bgCw.name}
+            key={activeColorway.name}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -179,31 +189,25 @@ function LogoCard({ logo, index }: { logo: (typeof LOGOS)[0]; index: number }) {
             className="absolute inset-0 flex items-center justify-center p-8 md:p-10"
           >
             <img
-              src={displaySrc}
+              src={activeColorway.src}
               alt={logo.alt}
               className="block max-h-[70%] max-w-[90%] w-auto h-auto object-contain"
-              style={{
-                filter: isLight ? "invert(1)" : "none",
-              }}
               decoding="async"
             />
           </motion.div>
         </AnimatePresence>
-        {/* Color name badge */}
         <span
-          className="absolute bottom-3 right-3 opacity-50"
+          className="absolute bottom-3 right-3 opacity-50 text-[#F0EDE8]"
           style={{
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: "0.55rem",
             letterSpacing: "0.25em",
-            color: isLight ? "#0C0C0C" : "#F0EDE8",
           }}
         >
-          {colorLabel}
+          {activeColorway.name}
         </span>
       </div>
 
-      {/* Info row + swatches */}
       <div className="flex items-center justify-between px-4 py-4 border-t border-border mt-auto">
         <span
           className="text-muted-foreground"
@@ -217,64 +221,17 @@ function LogoCard({ logo, index }: { logo: (typeof LOGOS)[0]; index: number }) {
           {logo.name}
         </span>
 
-        {swapMode ? (
-          /* Image-swap swatches */
-          <div className="flex items-center gap-2">
-            {(isWavy
-              ? WAVY_COLORWAYS
-              : isDck
-                ? DCK_COLORWAYS
-                : isOval
-                  ? OVAL_COLORWAYS
-                  : DUCK_COLORWAYS
-            ).map((c, i) => (
-              <button
-                key={c.name}
-                onClick={() => setActiveOval(i)}
-                title={c.name}
-                className="transition-transform duration-200 hover:scale-110"
-                style={{
-                  width: "14px",
-                  height: "14px",
-                  borderRadius: "50%",
-                  backgroundColor: c.swatch,
-                  border:
-                    i === activeOval
-                      ? "2px solid #F0EDE8"
-                      : "2px solid transparent",
-                  outline: i === activeOval ? "1px solid #555555" : "none",
-                  outlineOffset: "1px",
-                  cursor: "pointer",
-                }}
-              />
-            ))}
-          </div>
-        ) : (
-          /* Background-color swatches (fallback) */
-          <div className="flex items-center gap-2">
-            {COLORWAYS.map((c, i) => (
-              <button
-                key={c.name}
-                onClick={() => setActiveColor(i)}
-                title={c.name}
-                className="transition-transform duration-200 hover:scale-110"
-                style={{
-                  width: "14px",
-                  height: "14px",
-                  borderRadius: "50%",
-                  backgroundColor: c.hex,
-                  border:
-                    i === activeColor
-                      ? "2px solid #F0EDE8"
-                      : "2px solid transparent",
-                  outline: i === activeColor ? "1px solid #555555" : "none",
-                  outlineOffset: "1px",
-                  cursor: "pointer",
-                }}
-              />
-            ))}
-          </div>
-        )}
+        <div className="flex items-center gap-2">
+          {logo.colorways.map((colorway, i) => (
+            <SwatchButton
+              key={colorway.name}
+              color={colorway.swatch}
+              active={i === activeIndex}
+              title={colorway.name}
+              onClick={() => setActiveIndex(i)}
+            />
+          ))}
+        </div>
       </div>
     </motion.div>
   );
@@ -313,45 +270,47 @@ function SectionDivider({ label }: { label: string }) {
   );
 }
 
-export function DuckClubPage() {
-  const navigate = useNavigate();
-
+function SectionLabel({
+  children,
+  variant = "mono",
+}: {
+  children: string;
+  variant?: "mono" | "barlow";
+}) {
   return (
     <div
-      className="min-h-screen flex flex-col bg-background text-foreground"
-      style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
-    >
-      {/* Header */}
-      <header className="flex items-center justify-between px-6 py-4 border-b border-border sticky top-0 z-10 bg-background">
-        <button
-          onClick={() => navigate("/portfolio")}
-          className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors duration-200"
-          style={{ cursor: "pointer" }}
-        >
-          <span style={{ fontSize: "1.1rem" }}>←</span>
-          <span
-            className="tracking-[0.25em]"
-            style={{
+      className="text-muted-foreground mb-6"
+      style={
+        variant === "mono"
+          ? {
               fontFamily: "'JetBrains Mono', monospace",
-              fontSize: "0.65rem",
-            }}
-          >
-            PORTFOLIO
-          </span>
-        </button>
-        <span
-          className="text-muted-foreground tracking-[0.3em]"
-          style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: "0.65rem",
-          }}
-        >
-          DUCK CLUB
-        </span>
-      </header>
+              fontSize: "0.6rem",
+              letterSpacing: "0.35em",
+            }
+          : {
+              fontFamily: "'Barlow Condensed', sans-serif",
+              fontWeight: 600,
+              fontSize: "0.75rem",
+              letterSpacing: "0.2em",
+            }
+      }
+    >
+      {children}
+    </div>
+  );
+}
+
+export function DuckClubPage() {
+  return (
+    <PageShell>
+      <PageHeader
+        backTo="/portfolio"
+        backLabel="PORTFOLIO"
+        title="DUCK CLUB"
+        sticky
+      />
 
       <main className="flex-1 px-6 py-10 md:py-14 max-w-screen-xl mx-auto w-full">
-        {/* Page title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -384,17 +343,7 @@ export function DuckClubPage() {
           </p>
         </motion.div>
 
-        {/* ── LOGOS ── */}
-        <div
-          className="text-muted-foreground mb-6"
-          style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: "0.6rem",
-            letterSpacing: "0.35em",
-          }}
-        >
-          01 — LOGO SYSTEM
-        </div>
+        <SectionLabel variant="mono">01 — LOGO SYSTEM</SectionLabel>
 
         <div className="grid grid-cols-2 gap-px bg-border">
           {LOGOS.map((logo, i) => (
@@ -404,18 +353,7 @@ export function DuckClubPage() {
 
         <SectionDivider label="02 — BRAND APPLICATIONS" />
 
-        {/* Social media / banners placeholder */}
-        <div
-          className="text-muted-foreground mb-6"
-          style={{
-            fontFamily: "'Barlow Condensed', sans-serif",
-            fontWeight: 600,
-            fontSize: "0.75rem",
-            letterSpacing: "0.2em",
-          }}
-        >
-          BANNERS & SOCIAL POSTS
-        </div>
+        <SectionLabel variant="barlow">BANNERS & SOCIAL POSTS</SectionLabel>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-border mb-12">
           {BANNER_IMAGES.map((image) => (
             <MediaSlot key={image.alt} src={image.src} alt={image.alt} />
@@ -424,24 +362,13 @@ export function DuckClubPage() {
 
         <SectionDivider label="03 — PROCESS" />
 
-        {/* Process photos placeholder */}
-        <div
-          className="text-muted-foreground mb-6"
-          style={{
-            fontFamily: "'Barlow Condensed', sans-serif",
-            fontWeight: 600,
-            fontSize: "0.75rem",
-            letterSpacing: "0.2em",
-          }}
-        >
-          WORK IN PROGRESS
-        </div>
+        <SectionLabel variant="barlow">WORK IN PROGRESS</SectionLabel>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-px bg-border mb-16">
           {PROCESS_IMAGES.map((image) => (
             <MediaSlot key={image.alt} src={image.src} alt={image.alt} />
           ))}
         </div>
       </main>
-    </div>
+    </PageShell>
   );
 }

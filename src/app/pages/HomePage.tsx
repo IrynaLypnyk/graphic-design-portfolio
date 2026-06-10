@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 import { motion } from "motion/react";
+import { PageShell } from "@/app/components/layout/PageShell";
 
 const FACTS = [
   { label: "AGE", value: "17" },
@@ -14,10 +15,7 @@ export function HomePage() {
   const navigate = useNavigate();
 
   return (
-    <div
-      className="min-h-screen flex flex-col bg-background text-foreground overflow-hidden"
-      style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
-    >
+    <PageShell className="overflow-hidden">
       {/* Header */}
       <header className="flex items-center justify-between px-6 py-4 border-b border-border">
         <span
@@ -158,6 +156,6 @@ export function HomePage() {
           </span>
         </button>
       </motion.footer>
-    </div>
+    </PageShell>
   );
 }

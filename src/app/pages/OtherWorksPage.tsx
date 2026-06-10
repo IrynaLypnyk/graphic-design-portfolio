@@ -1,7 +1,8 @@
-import { useNavigate } from "react-router";
 import { motion } from "motion/react";
 import cover from "@/images/other/cover.png";
 import poster from "@/images/other/poster.png";
+import { PageShell } from "@/app/components/layout/PageShell";
+import { PageHeader } from "@/app/components/layout/PageHeader";
 
 const WORKS = [
   {
@@ -15,45 +16,11 @@ const WORKS = [
 ] as const;
 
 export function OtherWorksPage() {
-  const navigate = useNavigate();
-
   return (
-    <div
-      className="min-h-screen flex flex-col bg-background text-foreground"
-      style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
-    >
-      {/* Header */}
-      <header className="flex items-center justify-between px-6 py-4 border-b border-border">
-        <button
-          onClick={() => navigate("/portfolio")}
-          className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors duration-200"
-          style={{ cursor: "pointer" }}
-        >
-          <span style={{ fontSize: "1.1rem" }}>←</span>
-          <span
-            className="tracking-[0.25em]"
-            style={{
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: "0.65rem",
-            }}
-          >
-            PORTFOLIO
-          </span>
-        </button>
-        <span
-          className="text-muted-foreground tracking-[0.3em]"
-          style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: "0.65rem",
-          }}
-        >
-          OTHER WORKS
-        </span>
-      </header>
+    <PageShell>
+      <PageHeader backTo="/portfolio" backLabel="PORTFOLIO" title="OTHER WORKS" />
 
-      {/* Main */}
       <main className="flex-1 flex flex-col justify-between px-6 py-10 md:py-16">
-        {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -73,7 +40,6 @@ export function OtherWorksPage() {
           </div>
         </motion.div>
 
-        {/* Works grid */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -100,6 +66,6 @@ export function OtherWorksPage() {
           </div>
         </motion.div>
       </main>
-    </div>
+    </PageShell>
   );
 }

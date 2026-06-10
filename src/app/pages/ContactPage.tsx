@@ -1,5 +1,6 @@
-import { useNavigate } from "react-router";
 import { motion } from "motion/react";
+import { PageShell } from "@/app/components/layout/PageShell";
+import { PageHeader } from "@/app/components/layout/PageHeader";
 
 const LINKS = [
   { label: "TELEGRAM", handle: "@yourhandle", href: "https://t.me/yourhandle" },
@@ -8,39 +9,11 @@ const LINKS = [
 ];
 
 export function ContactPage() {
-  const navigate = useNavigate();
-
   return (
-    <div
-      className="min-h-screen flex flex-col bg-background text-foreground"
-      style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
-    >
-      {/* Header */}
-      <header className="flex items-center justify-between px-6 py-4 border-b border-border">
-        <button
-          onClick={() => navigate("/")}
-          className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors duration-200"
-          style={{ cursor: "pointer" }}
-        >
-          <span style={{ fontSize: "1.1rem" }}>←</span>
-          <span
-            className="tracking-[0.25em]"
-            style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem" }}
-          >
-            BACK
-          </span>
-        </button>
-        <span
-          className="text-muted-foreground tracking-[0.3em]"
-          style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.65rem" }}
-        >
-          CONTACT
-        </span>
-      </header>
+    <PageShell>
+      <PageHeader backTo="/" backLabel="BACK" title="CONTACT" />
 
-      {/* Main */}
       <main className="flex-1 flex flex-col justify-between px-6 py-10 md:py-16">
-        {/* Slogan */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -74,7 +47,6 @@ export function ContactPage() {
           </p>
         </motion.div>
 
-        {/* Links */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -135,6 +107,6 @@ export function ContactPage() {
           ))}
         </motion.div>
       </main>
-    </div>
+    </PageShell>
   );
 }
