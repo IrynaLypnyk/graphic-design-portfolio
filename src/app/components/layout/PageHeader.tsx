@@ -28,7 +28,7 @@ export function PageHeader({
     >
       <button
         onClick={() => navigate(backTo)}
-        className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors duration-200"
+        className="flex items-center gap-3 text-muted-foreground hover:text-foreground active:text-foreground transition-colors duration-200"
         style={{ cursor: "pointer" }}
       >
         <span style={{ fontSize: "1.1rem" }}>←</span>

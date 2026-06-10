@@ -148,7 +148,7 @@ function SwatchButton({
     <button
       onClick={onClick}
       title={title}
-      className="transition-transform duration-200 hover:scale-110"
+      className="transition-transform duration-200 hover:scale-110 active:scale-110"
       style={{
         width: "14px",
         height: "14px",

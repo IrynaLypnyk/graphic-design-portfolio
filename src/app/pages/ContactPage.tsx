@@ -60,7 +60,7 @@ export function ContactPage() {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center justify-between py-6 border-b border-border hover:pl-4 transition-all duration-300"
+              className="group flex items-center justify-between py-6 border-b border-border hover:pl-4 active:pl-4 transition-all duration-300"
             >
               <div className="flex items-center gap-6">
                 <span
@@ -87,7 +87,7 @@ export function ContactPage() {
               </div>
               <div className="flex items-center gap-4">
                 <span
-                  className="text-muted-foreground group-hover:text-foreground transition-colors duration-200"
+                  className="text-muted-foreground group-hover:text-foreground group-active:text-foreground transition-colors duration-200"
                   style={{
                     fontFamily: "'Barlow', sans-serif",
                     fontWeight: 300,
@@ -97,7 +97,7 @@ export function ContactPage() {
                   {link.handle}
                 </span>
                 <span
-                  className="text-muted-foreground group-hover:text-primary transition-colors duration-200"
+                  className="text-muted-foreground group-hover:text-primary group-active:text-primary transition-colors duration-200"
                   style={{ fontSize: "1rem" }}
                 >
                   →

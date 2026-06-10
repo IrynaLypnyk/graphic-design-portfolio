@@ -116,11 +116,11 @@ export function HomePage() {
       >
         <button
           onClick={() => navigate("/contact")}
-          className="group relative flex items-center justify-center py-8 md:py-10 border-r border-border transition-colors duration-300 hover:bg-foreground"
+          className="group relative flex items-center justify-center py-8 md:py-10 border-r border-border transition-colors duration-300 hover:bg-foreground active:bg-foreground"
           style={{ cursor: "pointer" }}
         >
           <span
-            className="tracking-[0.25em] text-foreground group-hover:text-background transition-colors duration-300"
+            className="tracking-[0.25em] text-foreground group-hover:text-background group-active:text-background transition-colors duration-300"
             style={{
               fontFamily: "'Barlow Condensed', sans-serif",
               fontWeight: 600,
@@ -134,11 +134,11 @@ export function HomePage() {
 
         <button
           onClick={() => navigate("/portfolio")}
-          className="group relative flex items-center justify-center gap-3 py-8 md:py-10 transition-colors duration-300 hover:bg-primary"
+          className="group relative flex items-center justify-center gap-3 py-8 md:py-10 transition-colors duration-300 hover:bg-primary active:bg-primary"
           style={{ cursor: "pointer" }}
         >
           <span
-            className="tracking-[0.25em] text-foreground group-hover:text-primary-foreground transition-colors duration-300"
+            className="tracking-[0.25em] text-foreground group-hover:text-primary-foreground group-active:text-primary-foreground transition-colors duration-300"
             style={{
               fontFamily: "'Barlow Condensed', sans-serif",
               fontWeight: 600,
@@ -149,7 +149,7 @@ export function HomePage() {
             PORTFOLIO
           </span>
           <span
-            className="text-muted-foreground group-hover:text-primary-foreground transition-colors duration-300"
+            className="text-muted-foreground group-hover:text-primary-foreground group-active:text-primary-foreground transition-colors duration-300"
             style={{ fontSize: "1.2rem" }}
           >
             →
